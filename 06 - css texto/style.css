@@ -1,0 +1,66 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+@font-face{
+    font-family: "Felona";
+    src: url("fonts/F.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-image: url('img/bgimg.jpg');
+    background-size: 100%;
+    background-attachment: fixed;
+}
+input, label{
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+label{
+    margin-right: 4px;
+}
+input[type="radio"]{
+    margin-right: 20px;
+}
+h3{
+    margin-bottom: 5px;
+}
+#aside{
+    width: 13%;
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    border-right: 1px solid rgb(154, 88, 8);;
+    padding-right: 7px;
+    margin-left: 1%;
+}
+#aside > h4 {
+    margin-bottom: 2vh;
+    font-size: 1.5vw;
+    font-family: sans-serif;
+}
+#aside > h4 > a{
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+#aside > h4:hover a{
+    color: rgb(154, 88, 8);
+    transition: 300ms all;
+}
+#main{
+    width: 70%;
+    margin-bottom: 100px;
+    margin-left: 10%;
+}
+.propiedades{
+    border: 1px solid black;
+    width: 70%;
+    margin: 20px auto;
+}
+

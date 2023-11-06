@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajedrez</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript">
+
+        window.onload = () => {
+
+            function ajedrez() {
+                let main = document.getElementById('main');
+                let actualizar = document.getElementById('actualizar');
+
+                /* Colocar tablero. Con dimensiones tomadas de los input en las funciones anteriores */
+                function colocarTablero(lado) {
+                    let lado_casilla = lado;
+                    let lado_tablero = lado_casilla * 8;
+
+                    main.style = `width: ${lado_tablero}px; height: ${lado_tablero}px; margin: auto; border: 10px solid rgb(111, 68, 37);;`;
+                    main.innerHTML = '';
+
+                    /* Ver si la fila es par o impar*/
+                    for (let j = 1; j <= 8; j++) {
+                        let c = '';
+                        if (j % 2 == 0) {
+                            c = 'par';
+                        } else {
+                            c = 'impar';
+                        }
+                        /* Ver si la casilla de la fila es par o impar 
+                        Si es impar colocar primero la casilla blanca y si es par colocar primero la casilla negra*/
+                        for (let i = 1; i <= 8; i++) {
+                            if (c == 'impar') {
+                                if (i % 2 == 0) {
+                                    main.innerHTML += `<div class='container par' id='${j}_${i}' style='width: ${lado_casilla}px; aspect-ratio: 1/1; ' ></div>`;
+                                    //main.innerHTML += "<div class='container par' id='" + j + '_' + i + "' style='width: " + lado_casilla + "px; aspect-ratio: 1/1; ' ></div>";
+                                } else if (i % 2 != 0) {
+                                    main.innerHTML += `<div class='container impar' id='${j}_${i}' style='width: ${lado_casilla}px; aspect-ratio: 1/1; ' ></div>`;
+                                }
+                            }
+                            if (c == 'par') {
+                                if (i % 2 == 0) {
+                                    main.innerHTML += `<div class='container impar' id='${j}_${i}' style='width: ${lado_casilla}px; aspect-ratio: 1/1; ' ></div>`;
+                                } else if (i % 2 != 0) {
+                                    main.innerHTML += `<div class='container par' id='${j}_${i}' style='width: ${lado_casilla}px; aspect-ratio: 1/1; ' ></div>`;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                /* cargar al iniciar la pagina con valores predeterminados */
+                colocarTablero(document.getElementById('lado').value);
+
+                /* funcion para asignar nuevas dimensiones a la casillas */
+                /*let casillas = document.querySelectorAll('.container');
+                function asignarNuevasDimensionesCasillas(lado) {
+                    for (let element of casillas) {
+                        element.style.width = lado + "px";
+                    }
+                }*/
+
+
+                let blancas = document.getElementById('blancas');
+                blancas.innerHTML = 'Blancas: ';
+                let negras = document.getElementById('negras');
+                negras.innerHTML = 'Negras: ';
+                /* Piezas de ajedrez: mismo ancho y alto que las casillas */
+                /*function colocarPiezasAjedrez() {
+                    
+                    let lista_imagenes = {
+                        blancas: ['torre_b1', 'caballo_b1', 'alfil_b1', 'rey_b1', 'reina_b1', 'alfil_b1', 'caballo_b1', 'torre_b1', 'peon_b1', 'peon_b1', 'peon_b1', 'peon_b1', 'peon_b1', 'peon_b1', 'peon_b1', 'peon_b1'],
+                        negras: ['torre_n1', 'caballo_n1', 'alfil_n1', 'rey_n1', 'reina_n1', 'alfil_n1', 'caballo_n1', 'torre_n1', 'peon_n1',  'peon_n1', 'peon_n1', 'peon_n1', 'peon_n1', 'peon_n1', 'peon_n1', 'peon_n1']
+                    };
+                    let lado_casilla = dimensionesCasillas();
+    
+                    for (index in lista_imagenes) {
+                        lista_imagenes[index].forEach((element, forEachIndex) => {
+                            if (index == 'blancas') blancas.innerHTML += '<img class="ficha-ajedrez" id="' + index + forEachIndex + '" src="img/' + element + '.png" style="width:' + lado_casilla + 'px;" draggable="true" />';
+                            if (index == 'negras') negras.innerHTML += '<img class="ficha-ajedrez" id="' + index + forEachIndex + '" src="img/' + element + '.png" style="width:' + lado_casilla + 'px;" draggable="true" />';
+                        });
+                    }
+                }
+                colocarPiezasAjedrez();*/
+
+                function colocarPiezasAjedrez() {
+                    let lista_imagenes = {
+                        blancas: {
+                            fila1: ['torre_b1', 'caballo_b1', 'alfil_b1', 'rey_b1', 'reina_b1', 'alfil_b1', 'caballo_b1', 'torre_b1'],
+                            fila2: ['peon_b1', 'peon_b1', 'peon_b1', 'peon_b1', 'peon_b1', 'peon_b1', 'peon_b1', 'peon_b1']
+                        },
+                        negras: {
+                            fila8: ['torre_n1', 'caballo_n1', 'alfil_n1', 'rey_n1', 'reina_n1', 'alfil_n1', 'caballo_n1', 'torre_n1'],
+                            fila7: ['peon_n1', 'peon_n1', 'peon_n1', 'peon_n1', 'peon_n1', 'peon_n1', 'peon_n1', 'peon_n1']
+                        }
+                    };
+                    let lado_casilla = document.getElementById('lado').value;
+
+                    for (color in lista_imagenes) {
+                        //console.log(color, lista_imagenes[color]);
+                        for (fila in lista_imagenes[color]) {
+                            //console.log(lista_imagenes[color][fila]);
+                            lista_imagenes[color][fila].forEach((element, columna) => {
+                                document.getElementById(fila.split('fila')[1] + '_' + (columna + 1)).innerHTML += '<img class="ficha-ajedrez" id="' + color + fila + columna + '" src="img/' + element + '.png" style="width:' + (lado_casilla-1) + 'px; margin-left:0.5px; " draggable="true" />';
+                            });
+                        }
+                    }
+                    console.log('nuevas', lado_casilla,);
+                }
+                colocarPiezasAjedrez();
+
+                /* Draggable */
+                let elemento_arrastrado = '';
+                let fichas_ajedrez = document.querySelectorAll('.ficha-ajedrez');
+                fichas_ajedrez.forEach(element => {
+                    element.addEventListener("dragstart", (evento) => {
+                        console.log("Estas moviendo una ficha de ajedrez");
+                        evento.dataTransfer.setData("id_pieza", evento.target.id); //evento.target saca el elemento sobre el que se hace dragstart
+                        //dataTransfer: mantiene valor de elemento arrastrado
+                        //setData anade o sustituye unos datos a dataTransfer. 
+                        elemento_arrastrado = evento.target.id;
+                    });
+                });
+
+                // drop : tiene que usarse en conjunto con dragover
+                // drop y dragover se usa en el elemento en el que se colocan los elementos arrastrados
+                main.addEventListener("dragover", (evento) => {
+                    evento.preventDefault(); //evitar comportamiento por defecto del main
+                });
+
+                main.addEventListener("drop", (evento) => {
+                    evento.preventDefault();
+                    let id = evento.dataTransfer.getData("id_pieza");
+
+
+                    /* -- Convertir peones en reinas -- */
+                    console.log('cosas', id, evento.target.id);
+                    console.log(id.split('fila')[1].split('')[0]);
+                    if (id.split('fila')[1].split('')[0] == '7') {
+                        if (evento.target.parentNode.id != 'main') {
+                            console.log('aaaaaaaaaaaa', evento.target.parentNode.id);
+                            if ( evento.target.parentNode.id.split('_')[0] == '1') {
+                                if (id.split('fila')[0] == 'negras') {
+                                    document.getElementById(id).src = "img/reina_n1.png";
+                                }
+                            }
+                        } else {
+                            console.log('aaaaaaaaaaaa', evento.target.id);
+                            if (evento.target.id.split('_')[0] == '1') {
+                                if (id.split('fila')[0] == 'negras') {
+                                    document.getElementById(id).src = "img/reina_n1.png";
+                                    console.log('bruh');
+                                }
+                            }
+                        }
+                    }
+                    if (id.split('fila')[1].split('')[0] == '2') {
+                        if (evento.target.parentNode.id != 'main') {
+                            if (evento.target.parentNode.id.split('_')[0] == '8') {
+                                if (id.split('fila')[0] == 'blancas') {
+                                    document.getElementById(id).src = "img/reina_b1.png";
+                                }
+                            }
+                        } else {
+                            if (evento.target.id.split('_')[0] == '8') {
+                                if (id.split('fila')[0] == 'blancas') {
+                                    document.getElementById(id).src = "img/reina_b1.png";
+                                }
+                            }
+                        }
+                    }
+                    /*-------------------------------------------------------------------------*/
+
+                    /* Mover ficha y mover las comidas */
+                    console.log(id);
+                    console.log('evento', evento.target, evento.target.parentNode);
+                    if (evento.target.parentNode.id != 'main') {
+                        //console.log('evento.target', evento.target);
+                        if (evento.target.id != id && evento.target.parentNode.childNodes[0].id.split('fila')[0] != id.split('fila')[0]) {
+                            evento.target.parentNode.appendChild(document.getElementById(id));
+                            if (evento.target.parentNode.childNodes[0].id.split('fila')[0] == 'blancas') {
+                                blancas.appendChild(evento.target.parentNode.childNodes[0]);
+                            } else {
+                                negras.appendChild(evento.target.parentNode.childNodes[0]);
+                            }
+
+                            /*esta linea era para cuando solo se eliminaban las fichas al ser comidas */
+                            //evento.target.parentNode.removeChild(evento.target.parentNode.childNodes[0]); 
+
+                        }
+
+                    } else {
+                        evento.target.appendChild(document.getElementById(id));
+                    }
+
+                    
+                });
+            }
+
+
+            /* Ejecutar ajedrez() al inicio */
+            ajedrez();
+
+            /* Actualizar las dimensiones de las casillas */
+            actualizar.addEventListener('click', () => {
+                ajedrez();
+            });
+
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="dimensiones-casillas">
+        <div id="header">
+            <label for="lado" id="lado-input-label">Lado casilla</label>
+            <input type="number" name="lado" id="lado" min="0" max="500" value="60" />
+            <input id="actualizar" type="button" value="CAMBIAR DIMENSIONES CASILLA">
+        </div>
+
+        <div id="main">
+
+        </div>
+        <div id="blancas">
+
+        </div>
+        <div id="negras">
+        </div>
+
+    </div>
+
+</body>
+
+</html>

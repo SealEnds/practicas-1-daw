@@ -1,0 +1,333 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: 'music-buttons';
+    src: url('assets/fonts/music_buttons.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "websymbols";
+    src: url("assets/fonts/websymbols-regular-webfont.svg#WebSymbolsRegular") format("svg"),
+        url("assets/fonts/websymbols-regular-webfont.eot");
+    src: url("assets/fonts/websymbols-regular-webfont.eot?#iefix") format("embedded-opnetype"),
+        url("assets/fonts/websymbols-regular-webfont.woff") format("woff"),
+        url('assets/fonts/websymbols-regular-webfont.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.websymbols {
+    font-family: "websymbols";
+    margin-right: 5px;
+}
+
+.music-button {
+    font-family: "music-buttons";
+    cursor: pointer;
+}
+
+$color-principal: white;
+$color-secundario: black;
+$color-terciario: green;
+$range-color: rgb(172, 229, 107);
+$active: rgb(81, 168, 182);
+
+body {
+    font-family: helvetica;
+}
+
+li {
+    list-style: none;
+}
+
+@mixin flex($direction, $wrap, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin dimensiones($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin margen($mv, $mh, $pv, $ph) {
+    margin: $mv $mh;
+    padding: $pv $ph;
+}
+
+// ------------------------------------------------------------------------------------------------- 
+#main-div {
+    width: 96%;
+    height: 98vh;
+    @include margen(1%, auto, 0, 10px);
+    border: 1px solid rgba(225, 225, 226, 0.8);
+    box-shadow: 0px 0px 10px #ccc;
+
+    header {
+        @include dimensiones(86%, fit-content);
+        margin: auto;
+        @include flex(row, wrap, space-between, center);
+        height: 14%;
+        border-bottom: 1px solid rgba(225, 225, 226, 0.8);
+
+        .logo {
+            flex-basis: 35%;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #ccc;
+            font-size: 35px;
+            font-style: italic;
+            font-weight: 900;
+            color: $color-terciario;
+        }
+
+        #menu {
+            text-transform: uppercase;
+            flex-basis: 50%;
+            
+            ul {
+                width: 100%;
+                @include flex(row, wrap, space-between, center);
+
+                li {
+                    width: 20%;
+                    text-align: center;
+
+                    a {
+                        color: $color-secundario;
+                        font-size: 16px;
+                        font-weight: 500;
+                    }
+                    a:hover{
+                        color: $color-terciario;
+                    }
+                }
+            }
+        }
+    }
+
+    #main {
+        @include dimensiones(96%, min-content);
+        margin: auto;
+        display: grid;
+        grid-template-columns: 15% 1fr;
+        gap: 3%;
+        max-height: 80vh;
+
+        #aside {
+            @include flex(column, wrap, flex-start, flex-start);
+
+            #aside-menu {
+                ul {
+                    li {
+                        margin-top: 50px;
+
+                        a {
+                            color: $color-terciario;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        #projects {
+            background-color: #f2f2f2;
+            height: 63vh;
+            overflow-x: scroll;
+            @include flex(column, wrap, flex-start, center);
+            gap: 10px;
+
+            .project {
+
+                height: 48%;
+                aspect-ratio: 1/1;
+
+                img {
+                    width: 75%;
+                    cursor: pointer;
+                }
+
+                .project-info {
+                    h3 {
+                        font-size: 14px;
+                        cursor: pointer;
+                    }
+
+                    a {
+                        font-size: 14px;
+                        color: $color-terciario;
+                    }
+
+                    a:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+    }
+
+    footer {
+        margin-top: 3vh;
+        background-color: $color-secundario;
+        padding: 10px;
+        color: $color-principal;
+
+        div {
+            text-align: center;
+            height: 14vh;
+            @include flex(row, wrap, center, center);
+
+            #reproduciendo-img-div {
+                width: 5%;
+
+                img {
+                    height: 100%;
+                }
+            }
+
+            #controles-reproduccion {
+                width: 80%;
+
+                #controles-tiempo {
+                    width: 60%;
+
+                    span {
+                        margin-right: 5%;
+                    }
+
+                    #time {
+                        display: block;
+                        width: 100px;
+                    }
+
+                    #time-range {
+                        display: block;
+                        width: 60%;
+                    }
+                }
+
+                #controles-volumen {
+                    width: 30%;
+
+                    #volume-range {
+                        width: 40%;
+                        margin-left: 5%;
+                        min-width: 60px;
+                    }
+                }
+            }
+
+        }
+
+    }
+}
+
+
+.active {
+    text-decoration: underline;
+    color: $active !important;
+}
+
+input[type="range"] {
+    appearance: none;
+    background: $range-color;
+    height: 10px;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none !important;
+    background: rgb(255, 255, 255);
+    height: 10px;
+    width: 10px;
+    cursor: pointer;
+}
+
+
+@media (max-width: 750px) {
+    header {
+        height: min-content !important;
+        display: block !important;
+        text-align: center;
+    }
+
+    header #menu {
+        @include flex(row, wrap, center, center);
+        margin-bottom: 20px;
+    }
+
+
+    #reproduciendo-img-div {
+        width: 20% !important;
+
+    }
+
+    #controles-reproduccion {
+        width: 70% !important;
+    }
+
+
+    #main {
+        width: 100% !important;
+        grid-template-columns: 25% 1fr !important;
+    }
+}
+
+@media (max-width: 390px) {
+    #menu>ul {
+        flex-direction: column !important;
+    }
+
+    #main {
+        display: flex !important;
+        flex-wrap: wrap !important;
+    }
+
+    #aside-menu>ul>li {
+        margin-top: 2px !important;
+    }
+
+    #projects {
+        height: 56vh !important;
+        width: 80%;
+        margin: 10px auto;
+    }
+
+    footer {
+        height: 40%;
+    }
+
+    footer>div {
+        display: block !important;
+        height: 100% !important;
+    }
+
+    #reproduciendo-img-div {
+        height: 100px !important;
+        margin: auto !important;
+    }
+
+    footer #controles-reproduccion {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    #controles-tiempo {
+        width: 100% !important;
+    }
+
+    #controles-volumen {
+        height: 4vh !important;
+        width: 60% !important;
+        margin: auto;
+    }
+
+}

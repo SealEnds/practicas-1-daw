@@ -1,0 +1,198 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* Fuentes ----------------------------------------------------------------------------------------*/
+@font-face {
+    font-family: 'symbols';
+    src: url('assets/fonts/symbols.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'digimon';
+    src: url('assets/fonts/digimon.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'digimonTitle';
+    src: url('assets/fonts/digimonitalic.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'digimon';
+}
+
+/* Tablero -------------------------------------------------------------------------------------*/
+#board{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background-image: url("assets/img/background.png");
+    background-size: cover;
+    background-position: 1%;
+    height: 300px;
+    padding-top: 10px;
+}
+
+#board > div {
+    width: 45%;
+    height: 400px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+#board > div > div {
+    width: 30%;
+    text-align: center;
+    align-self: center;
+}
+
+#equipo-1{
+    transform: scaleX(-1);
+}
+
+.background2{
+    background-image: url("assets/img/background2.png");
+    height: 300px;
+    background-size: cover;
+    background-position: 500px;
+}
+
+/* Header --------------------------------------------------------------------------------------*/
+#header{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    background-image: url('assets/img/header.png');
+    background-size: 390px;
+    background-position: 500px;
+    border-bottom: 4px outset rgb(255, 214, 50);
+    padding-top: 10px;
+}
+#header > div{
+    display: flex;
+    text-align: center;
+}
+
+#header > div:nth-child(1){
+    width: 20%;
+    min-width: 200px;
+    flex-direction: column;
+}
+#header > div:nth-child(2){
+    width: 56%;
+    min-width: 700px;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+#header > div:nth-child(2) > * {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+#header > div:nth-child(3){
+    width: 20%;
+    min-width: 200px;
+    flex-direction: column;
+    justify-content: center;
+    display: block;
+}
+label{
+    color: white;
+}
+#name{
+    display: block;
+    margin: auto;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-align: center;
+    width: fit-content;
+    font-family: 'digimon';
+    letter-spacing: 5px;
+    background-color: #e5bc55e8;
+    color: #30385c;
+}
+.team-title{
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+    text-transform: uppercase;
+    line-height: 74px;
+}
+.team-title > span{
+    font-size: 24px;
+}
+.team-1,
+.team-2{
+    background-color: rgb(56, 72, 115, 0.85);
+    color: goldenrod;    
+    border: 1px dashed palegoldenrod; 
+    border-bottom: none;
+    padding: 0px 10px;
+}
+.button{
+    cursor: pointer;
+    color: #090f25;
+    text-transform: uppercase;
+    border: none;
+    padding: 5px;
+    font-family: 'digimon';
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.button-team-1{
+    background-color: rgb(164, 203, 147, 0.8 );
+    transition: 300ms all;
+}
+.button-team-2{
+    background-color: rgb(80, 188, 185, 0.8);
+    transition: 300ms all;
+}
+.button-team-1:hover,
+.button-team-2:hover{
+    background-color: rgb(114, 106, 168,  0.90); 
+    border: 1px dashed palegoldenrod; 
+    border-bottom: none;
+    color: gold;
+}
+.selection-button{
+    padding: 5px;
+    margin-top: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 16px;
+}
+#audio{
+    background: none;
+}
+#list-1{
+    background-color: rgb(164, 203, 147, 0.8 );
+    cursor: pointer;
+    width: 160px;
+    font-family: 'digimon';
+    letter-spacing: 1px;
+    color: #30385c;
+    padding: 5px 0px 5px 5px;
+}
+#list-2{
+    background-color: rgb(80, 188, 185, 0.8);
+    cursor: pointer;
+    width: 160px;
+    font-family: 'digimon';
+    letter-spacing: 1px;
+    color: #30385c;
+    padding: 5px 0px 5px 5px;
+}
+
+#logo{
+    width: 170px
+}
+audio{
+    height: 27px;
+}

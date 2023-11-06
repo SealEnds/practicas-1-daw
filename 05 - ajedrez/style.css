@@ -1,0 +1,64 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-image: url('img/mesa.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-size: 50%;
+}
+
+.container {
+    float: left;
+}
+
+.par {
+    background-color: rgb(93, 96, 63);
+}
+
+.impar {
+    background-color: rgb(255, 255, 255);
+}
+
+#blancas{
+    background-color: black;
+    color: white;
+    margin-top: 10px;
+}
+#negras{
+    background-color: white;
+    color: black;
+}
+
+#header{
+    background-color: black;
+    opacity: 0.9;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 10px;
+}
+#lado-input-label{
+    color: white;
+    text-transform: uppercase;
+    margin-right: 20px;
+}
+#lado{
+    margin-right: 20px;
+    width: 50px;
+}
+#actualizar{
+    color:white;
+    background-color: black;
+    cursor: pointer;
+}
+#blancas,
+#negras{
+    width: 96%;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row wrap;
+
+}

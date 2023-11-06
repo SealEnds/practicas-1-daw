@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fight</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="main.js" defer></script>
+</head>
+
+<body>
+
+    <header id="header">
+        <div>
+            <label for="add">Añadir Personajes</label>
+            <select name="name" id="name">
+                <option value="imperialdramon">imperialdramon</option>
+                <option value="ancientbeatmon">ancientbeatmon</option>
+                <option value="beelzemon">beelzemon</option>
+                <option value="saberleomon">saberleomon</option>
+                <option value="rosemon">rosemon</option>
+                <option value="kabuterimon">kabuterimon</option>
+                <option value="hiandromon">hiandromon</option>
+                <option value="metalgarurumon">metalgarurumon</option>
+                <option value="mugendramon">mugendramon</option>
+                <option value="phoenixmon">phoenixmon</option>
+                <option value="piedmon">piedmon</option>
+                <option value="ancientvolcmon">ancientvolcmon</option>
+                <option value="plesiomon">plesiomon</option>
+                <option value="pukumon">pukumon</option>
+                <option value="seraphimon">seraphimon</option>
+                <option value="valkyrimon">valkyrimon</option>
+                <option value="myotismon">myotismon</option>
+                <option value="wargreymon">wargreymon</option>
+            </select>
+            <div>
+                <input type="button" value="Equipo 1" id="button-1" class="selection-button button button-team-1" />
+                <input type="button" value="Equipo 2" id="button-2" class="selection-button button button-team-2" />
+            </div>
+
+        </div>
+
+        <div>
+            <p class="team-1 team-title">Equipo <span>1</span></p>
+            <select name="list" id="list-1" size="5">
+
+            </select>
+            <input type="button" value="Mover a Equipo 2" id="mover-a-2" class="button button-team-1" />
+            <input type="button" value="Mover a Equipo 1" id="mover-a-1" class="button button-team-2" />
+            <select name="list" id="list-2" size="5">
+
+            </select>
+            <p class="team-2 team-title">Equipo <span>2</span></p>
+
+        </div>
+        <div>
+            <img src="assets/img/logo.png" alt="logo" id="logo" />
+            <audio id="audio" >
+                <source src="assets/sound/bg.mp3#t=00:00:30" type="audio/mp3">
+            </audio>
+        </div>
+    </header>
+
+
+    <main>
+        <div id="board">
+            <div id="equipo-1">
+            </div>
+            <div id="equipo-2">
+            </div>
+        </div>
+
+
+        <div class="background2"></div>
+        <div class="background2"></div>
+
+    </main>
+</body>
+
+</html>

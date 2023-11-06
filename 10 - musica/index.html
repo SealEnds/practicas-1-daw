@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maquetación 03</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- Instalar SASS: 
+            Instalar node.js
+            cmd: npm install -g sass
+                sass --watch style.scss style.css
+    -->
+    <script type="text/javascript">
+        window.addEventListener('load', () => {
+            function get(id) {
+                return document.getElementById(id);
+            }
+
+            let projects = get('projects');
+        
+            /* Scroll de canciones */
+            let delta = 0;
+            projects.addEventListener("wheel", (e) => {
+                console.log(delta);
+                delta += event.deltaY * 3;
+                if (delta < 0) delta = 0;
+                if (delta > projects.scrollWidth) delta = projects.scrollWidth;
+                e.preventDefault();
+                projects.scrollTo(delta, 0);
+            }, { passive: false });
+
+            /* Control de Música*/
+            let play = get('play');
+            let song = get('song');
+            song.volume = 0.5;
+            let play_stop = 'play';
+            let volume_range = get('volume-range');
+            let time = get('time');
+            let volume_symbol = get('volume');
+            play.addEventListener("click", () => {
+                play_stop == 'play' ? playSong() : stopSong();
+            });
+            let time_range = get('time-range');
+
+            function playSong() {
+                song.play();
+                play.innerHTML = 'b';
+                play_stop = 'stop';
+                time_range.max = song.duration;
+            }
+            function stopSong() {
+                song.pause();
+                play.innerHTML = 'a';
+                play_stop = 'play';
+            }
+            volume_range.addEventListener('input', () => {
+                song.volume = volume_range.value / 100;
+                if (song.volume == 0) {
+                    volume_symbol.innerHTML = 'o';
+                } else {
+                    volume_symbol.innerHTML = 'q';
+                }
+            });
+            song.addEventListener('timeupdate', function () {
+                let total_time = formatTime(this.duration);
+                let current_time = formatTime(this.currentTime);
+                time.innerHTML = current_time + ' / ' + total_time;
+                time_range.value = this.currentTime;
+                if(current_time == total_time) {
+                    stopSong();
+                    setTimeout(() => {
+                        this.currentTime = 0;
+                        playSong();
+                    }, 1000);
+                }
+            });
+            function formatTime(param) {
+                let min = Math.floor(param / 60);
+                let sec = Math.floor(param - min * 60);
+                if (min < 10) min = '0' + min;
+                if (sec < 10) sec = '0' + sec;
+                return min + ':' + sec;
+            }
+            time_range.addEventListener('input', changeTime);
+            function changeTime(){
+                song.currentTime = time_range.value;
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="main-div">
+        <header id="header">
+            <h1 class="logo">Espotifai</h1>
+
+            <nav id="menu">
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Cuenta</a></li>
+                    <li><a href="#">Perfil</a></li>
+                    <li><a href="#">Premium</a></li>
+                </ul>
+            </nav>
+
+        </header>
+
+        <div id="main">
+            <aside id="aside">
+                <nav id="aside-menu">
+                    <ul>
+                        <li><a href="#"><span class="websymbols">L</span>Buscar</a></li>
+                        <li><a href="#" class="active"><span class="websymbols">Z</span>Tu Biblioteca</a></li>
+                        <li><a href="#"><span class="websymbols">+</span>Crear lista</a></li>
+                        <li><a href="#"><span class="websymbols">N</span>Canciones que te gustan</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <div id="projects">
+
+                <article class="project">
+                    <img src="assets/img/balas_perdidas.jpg" />
+                    <div class="project-info">
+                        <h3>Balas Perdidas</h3>
+                        <a href="#">Morat</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/4_latidos.jpg" />
+                    <div class="project-info">
+                        <h3>4 Latidos Tour</h3>
+                        <a href="#">Sin bandera, Camila</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/dharma.jpg" />
+                    <div class="project-info">
+                        <h3>Dharma</h3>
+                        <a href="#">Sebastián Yatra</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/freedom.jpg" />
+                    <div class="project-info">
+                        <h3>Freedom</h3>
+                        <a href="#">Akon</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/gafas_rotas.jpg" />
+                    <div class="project-info">
+                        <h3>Gafas Rotas</h3>
+                        <a href="#">Duende Callejero</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/la_llave_maestra.jpg" />
+                    <div class="project-info">
+                        <h3>La Llave Maestra</h3>
+                        <a href="#">Green Valley</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/melendi.jpg" />
+                    <div class="project-info">
+                        <h3>10:20:40</h3>
+                        <a href="#">Melendi</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/formula3.jpg" />
+                    <div class="project-info">
+                        <h3>Formula vol. 3</h3>
+                        <a href="#">Romeo Santos</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/daft_punk.jpg" />
+                    <div class="project-info">
+                        <h3>Random Access Memories</h3>
+                        <a href="#">Daft Punk</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/nacido_en_mexico.jpg" />
+                    <div class="project-info">
+                        <h3>Nacido En México</h3>
+                        <a href="#">Alejandro Fernández</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/prisma.jpg" />
+                    <div class="project-info">
+                        <h3>Prisma</h3>
+                        <a href="#">Beret</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/si_ayer_fuera_hoy.jpg" />
+                    <div class="project-info">
+                        <h3>Si Ayer Fuera Hoy</h3>
+                        <a href="#">Morat</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/adonde_vamos.jpg" />
+                    <div class="project-info">
+                        <h3>Adonde Vamos</h3>
+                        <a href="#">Morat</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/tabaco_chanel.jpg" />
+                    <div class="project-info">
+                        <h3>Tabaco y Chanel</h3>
+                        <a href="#">Bacilos, Morat</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/duende_callejero.jpg" />
+                    <div class="project-info">
+                        <h3>Nuestra Manera de Hablar</h3>
+                        <a href="#">Duende Callejero</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/fantasia.jpg" />
+                    <div class="project-info">
+                        <h3>Fantasía</h3>
+                        <a href="#">Sebastián Yatra</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/battlecry.jpg" />
+                    <div class="project-info">
+                        <h3>Two Steps From Hell</h3>
+                        <a href="#">Battlecry</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/rebujitos.jpg" />
+                    <div class="project-info">
+                        <h3>Todos los Besos</h3>
+                        <a href="#">Los Rebujitos</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/land_of_fire.jpg" />
+                    <div class="project-info">
+                        <h3>Land of Fire</h3>
+                        <a href="#">Kordhell</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/high.jpg" />
+                    <div class="project-info">
+                        <h3>High</h3>
+                        <a href="#">Lighthouse Family</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/walls.jpg" />
+                    <div class="project-info">
+                        <h3>Mentiras y Azar</h3>
+                        <a href="#">Walls</a>
+                    </div>
+                </article>
+                <article class="project">
+                    <img src="assets/img/nightcall.jpg" />
+                    <div class="project-info">
+                        <h3>Nightcall</h3>
+                        <a href="#">Kravinsky</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <footer id="footer">
+            <div>
+                <div id="reproduciendo-img-div">
+                    <img src="assets/img/duende_callejero.jpg" alt="reproduciendo" />
+                </div>
+                <div id="controles-reproduccion">
+                    <div id="controles-tiempo">
+                        <span id="time">00:00 / 00:00</span>
+                        <span class="music-button" id="play">a</span>
+                        <input type="range" name="time" id="time-range" min="0" max="100" value="0" />
+                    </div>
+                    <div id="controles-volumen">
+                        <span class="music-button" id="volume">q</span>
+                        <input type="range" name="volume" id="volume-range" min="0" max="100" />
+                        <audio id="song" src="assets/sounds/llego_la_noche.mp3">
+
+                        </audio>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
