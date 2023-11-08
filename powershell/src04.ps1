@@ -12,7 +12,7 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-$password04 = "8 | 8 | 9 | 7 | 2 | 3 |"
+$password04 = "8 | 8 | 9 | 7 | 2 |"
 
 #Pantalla
 $Pantalla04 = New-Object System.Windows.Forms.Form 
@@ -62,7 +62,7 @@ Function AddButton04 {
 
 AddButton04 -texto "X" -mtop -3 -mizq 1343 -alto 60 -ancho 60 -font 20 -backcolor "coral"
 
-$teclado = ForEach($tecla in 0..9) { 
+ForEach($tecla in 0..9) { 
     
     switch ($tecla){
         {$tecla -eq 0 } { $fila04 = 0 }
