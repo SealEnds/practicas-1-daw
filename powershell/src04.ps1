@@ -1,7 +1,7 @@
-﻿# Víctor Pérez Quesada - 17/03/2023
+﻿# 17/03/2023
 
 #Crear un programa gráfico de nombre login que es una pantalla de entrada a una aplicación, de forma que disponga de un cuadro de texto (TextBox) grande, 
-#y se deba de pulsar 10 botones, del 0 al 9, para escribir la contraseña de entrada, que será 889723. 
+#y se deba de pulsar 10 botones, del 0 al 9, para escribir la contraseña de entrada, que será 88972. 
 #Esta contraseña se irá escribiendo en el TextBox a medida que se pulsan los botones.
 #Se deberá de colocar un botón para borrar el contenido del TextBox y otro para validarlo.
 #Si la contraseña es correcta, se termina el programa.
